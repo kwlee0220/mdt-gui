@@ -1,0 +1,152 @@
+/***************************************************
+ * 
+ * Dashboard CSS
+ * 
+ ***************************************************/
+.pnl_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.pnl_dashboard,
+.pnl-instance {
+  width: 1600px;
+  padding: 16px 20px;
+  background-color: #0000001a;
+  flex: 1 1;
+}
+
+.inner-title {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card.card-input {
+  box-shadow: none !important;
+  margin-bottom: 12px;
+}
+
+.card-input .card-etc-header {
+  padding: 12px 20px;
+  border-radius: 5px;
+  background-color: black;
+  display: flex;
+  justify-content: space-between !important;
+  color: white;
+  margin: 0px 10px;
+}
+
+.modal-content {
+  .pnl-detail {
+    margin: 16px;
+    padding: 16px;
+    border: 1px solid #535353;
+    border-radius: 5px;
+
+    .pnl-linklist {
+      .pnl-linkitem {
+        padding: 0px 0px 0px 12px;
+        border-radius: 5px;
+        background-color: #2196f336;
+        border: 1px solid #2196f3;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.card-widget {
+  margin-bottom: 0px;
+  height: 100% !important;
+  min-height: 200px !important;
+
+  .tree-parent {
+    font-size: 16px !important;
+  }
+
+  .item-empty-image {
+    text-align: center;
+
+    i {
+      font-size: 80px;
+      margin-bottom: 16px;
+    }
+  }
+
+  .tree-wrapper {
+    margin: 12px;
+    padding: 16px 0px;
+    border: 1px solid #4d4d4d;
+    border-radius: 5px;
+  }
+
+  .pnl-tree-wrapper.pnl-widget-tree {
+    height: auto;
+  }
+
+  .btn-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .value-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+    position: relative;
+    z-index: 10;
+
+    .title-wrapper {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .value-title {
+        font-size: 50px;
+        padding: 30px 0 10px 0px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .view-wrapper {
+    margin: 12px;
+    border: 1px solid #4d4d4d;
+    border-radius: 5px;
+
+    .view-item-title {
+      border-bottom: 1px solid #4d4d4d;
+    }
+
+    .view-item {
+      padding: 12px;
+    }
+
+    .bottom-line {
+      border-bottom: 1px solid #4d4d4d;
+    }
+
+    hr {
+      margin: 5px 0;
+      color: #4d4d4d;
+      opacity: 1;
+    }
+  }
+}
+
+.pnl-widget-tree {
+  span.text-muted {
+    color: white !important;
+  }
+}

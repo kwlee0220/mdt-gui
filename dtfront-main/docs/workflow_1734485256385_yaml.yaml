@@ -1,0 +1,111 @@
+{
+  "apiVersion": "argoproj.io/v1alpha1",
+  "kind": "Workflow",
+  "metadata": {
+    "generateName": "test-"
+  },
+  "spec": {
+    "entrypoint": "dag",
+    "templates": [
+      {
+        "name": "dag",
+        "dag": {
+          "tasks": [
+            {
+              "name": "CopyDetectList",
+              "template": "CopyDetectList-template"
+            },
+            {
+              "name": "ProcessSimulation",
+              "template": "ProcessSimulation-template",
+              "dependencies": [
+                "CopyDetectList"
+              ]
+            },
+            {
+              "name": "CopyCycleTime",
+              "template": "CopyCycleTime-template",
+              "dependencies": [
+                "ProcessSimulation"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "CopyDetectList-template",
+        "container": {
+          "image": "kwlee0220/mdt-client",
+          "command": [
+            "java"
+          ],
+          "args": [
+            "-cp",
+            "mdt-client-all.jar",
+            "mdt.task.builtin.CopyTaskCommand",
+            "inspector/Data/Data.DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue",
+            "inspector/Simulation/Simulation.SimulationInfo.Inputs[0].InputValue"
+          ],
+          "env": [
+            {
+              "name": "MDT_ENDPOINT",
+              "value": "http://127.0.0.1:12985"
+            }
+          ]
+        }
+      },
+      {
+        "name": "ProcessSimulation-template",
+        "container": {
+          "image": "kwlee0220/mdt-client",
+          "command": [
+            "java"
+          ],
+          "args": [
+            "-cp",
+            "mdt-client-all.jar",
+            "mdt.task.builtin.HttpTaskCommand",
+            "--server",
+            "http://127.0.0.1:12987",
+            "--timeout",
+            "1m",
+            "--logger",
+            "info",
+            "--input.DefectList",
+            "inspector/Simulation/Simulation.SimulationInfo.Inputs[0].InputValue",
+            "--output.AverageCycleTime",
+            "inspector/Simulation/Simulation.SimulationInfo.Outputs[0].OutputValue"
+          ],
+          "env": [
+            {
+              "name": "MDT_ENDPOINT",
+              "value": "http://127.0.0.1:12985"
+            }
+          ]
+        }
+      },
+      {
+        "name": "CopyCycleTime-template",
+        "container": {
+          "image": "kwlee0220/mdt-client",
+          "command": [
+            "java"
+          ],
+          "args": [
+            "-cp",
+            "mdt-client-all.jar",
+            "mdt.task.builtin.CopyTaskCommand",
+            "inspector/Simulation/Simulation.SimulationInfo.Outputs[0].OutputValue",
+            "inspector/Data/Data.DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+          ],
+          "env": [
+            {
+              "name": "MDT_ENDPOINT",
+              "value": "http://127.0.0.1:12985"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

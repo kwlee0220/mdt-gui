@@ -1,0 +1,141 @@
+apiVersion: "argoproj.io/v1alpha1"
+kind: "Workflow"
+metadata:
+  generateName: "thickness-defect-inspection-"
+spec:
+  entrypoint: "dag"
+  templates:
+  - name: "dag"
+    dag:
+      tasks:
+      - name: "copy-image"
+        template: "copy-image-template"
+      - name: "inspect-thickness"
+        dependencies:
+        - "copy-image"
+        template: "inspect-thickness-template"
+      - name: "copy-defect"
+        dependencies:
+        - "inspect-thickness"
+        template: "copy-defect-template"
+      - name: "copy-defect-list"
+        template: "copy-defect-list-template"
+      - name: "update-defect-list"
+        dependencies:
+        - "copy-defect-list"
+        - "copy-defect"
+        template: "update-defect-list-template"
+      - name: "copy-updated-defect-list"
+        dependencies:
+        - "update-defect-list"
+        template: "copy-updated-defect-list-template"
+  - name: "copy-image-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[2].ParameterValue"
+      - "inspector/ThicknessInspection/AIInfo.Inputs[0].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "inspect-thickness-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.HttpTaskCommand"
+      - "--server"
+      - "http://129.254.91.134:12987"
+      - "--id"
+      - "inspector/ThicknessInspection"
+      - "--timeout"
+      - "1m"
+      - "--logger"
+      - "info"
+      - "--submodel"
+      - "inspector/ThicknessInspection"
+      - "--in.UpperIlluminanceImage"
+      - "inspector/ThicknessInspection/AIInfo.Inputs[0].InputValue"
+      - "--out.Defect"
+      - "inspector/ThicknessInspection/AIInfo.Outputs[0].OutputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-defect-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/ThicknessInspection/AIInfo.Outputs[0].OutputValue"
+      - "inspector/UpdateDefectList/AIInfo.Inputs[0].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-defect-list-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+      - "inspector/UpdateDefectList/AIInfo.Inputs[1].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "update-defect-list-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.HttpTaskCommand"
+      - "--server"
+      - "http://129.254.91.134:12987"
+      - "--id"
+      - "inspector/UpdateDefectList"
+      - "--timeout"
+      - "1m"
+      - "--logger"
+      - "info"
+      - "--submodel"
+      - "inspector/UpdateDefectList"
+      - "--in.Defect"
+      - "inspector/UpdateDefectList/AIInfo.Inputs[0].InputValue"
+      - "--in.DefectList"
+      - "inspector/UpdateDefectList/AIInfo.Inputs[1].InputValue"
+      - "--out.UpdatedDefectList"
+      - "inspector/UpdateDefectList/AIInfo.Outputs[0].OutputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-updated-defect-list-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/UpdateDefectList/AIInfo.Outputs[0].OutputValue"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"

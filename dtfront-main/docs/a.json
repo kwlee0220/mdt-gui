@@ -1,0 +1,83 @@
+{
+  "id": "workflow-model-01",
+  "name": "워크플로우 생성",
+  "description": "설명",
+  "taskDescriptors": [
+    {
+      "id": "set-01",
+      "name": "SET 01",
+      "type": "mdt.task.builtin.SetTask",
+      "description": "set 설명",
+      "dependencies": [],
+      "inputVariables": [
+        {
+          "@type": "mdt:variable:value",
+          "name": "",
+          "description": "",
+          "value": { "@type": "mdt:value:integer", "value": 7 }
+        }
+      ],
+      "outputVariables": [
+        {
+          "@type": "mdt:ref:element",
+          "submodelReference": {
+            "instanceId": "welder",
+            "submodelIdShort": "Data"
+          },
+          "elementPath": "DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+        }
+      ],
+      "options": [],
+      "labels": []
+    },
+    {
+      "id": "http-01",
+      "name": "HTTP 01",
+      "type": "mdt.task.builtin.HttpTask",
+      "description": "Http 테스트",
+      "dependencies": ["set-01"],
+      "inputVariables": [
+        {
+          "@type": "mdt:ref:element",
+          "submodelReference": {
+            "instanceId": "welder",
+            "submodelIdShort": "Data"
+          },
+          "elementPath": "DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+        },
+        {
+          "@type": "mdt:variable:value",
+          "name": "",
+          "description": "",
+          "value": { "@type": "mdt:value:integer", "value": 7 }
+        },
+        {
+          "@type": "mdt:ref:element",
+          "submodelReference": {
+            "instanceId": "welder",
+            "submodelIdShort": "ProductivityPrediction"
+          },
+          "elementPath": "Operation"
+        }
+      ],
+      "outputVariables": [
+        {
+          "@type": "mdt:ref:element",
+          "submodelReference": {
+            "instanceId": "welder",
+            "submodelIdShort": "WelderAmpereLog"
+          },
+          "elementPath": "Segments.Tail.RecordCount"
+        }
+      ],
+      "options": [
+        { "name": "url", "value": "http://192.168.1.1" },
+        { "name": "timeout", "value": "" },
+        { "name": "poll", "value": "1.0" },
+        { "name": "logger", "value": "info" }
+      ],
+      "labels": []
+    }
+  ],
+  "gui": { "flow": "" }
+}

@@ -1,0 +1,454 @@
+/***************************************************
+ * 
+ * Workflow CSS
+ * 
+ ***************************************************/
+.title-workflow {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+
+  .new {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .legacy {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.panel-empty-workflow {
+  border: 1px solid #535353;
+  border-radius: 5px;
+  background-color: #141517;
+  font-size: 40px;
+}
+
+.workflow-header {
+  display: flex;
+  align-items: center !important;
+  flex-wrap: nowrap;
+  padding: 10px 16px;
+}
+
+.btn-toolkit {
+  padding: 10px 16px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.btn-toolkit:hover {
+  color: white;
+  background: #0c83ff;
+  border-radius: 5px;
+}
+
+.container-workflow {
+  overflow: auto;
+  flex: 1 1;
+}
+
+.pnl-logview-property {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: #2c2d33 !important;
+  width: 600px;
+  padding: 0;
+
+  .card-logview {
+    min-width: 400px;
+    border: 2px solid #2b99194f;
+    height: 100%;
+
+    .pnl-logview-title {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center !important;
+      border-bottom: 2px solid black;
+    }
+
+    .card-body {
+      overflow: auto;
+      height: calc(100% - 58px);
+    }
+  }
+}
+
+.pnl-workflow {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1 1;
+  height: calc(100% - 130px);
+  overflow: hidden;
+
+  .pnl-property {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: #202125 !important;
+    width: 600px;
+
+    .card-property {
+      min-width: 400px;
+      border: 2px solid black;
+      height: 100%;
+
+      .pnl-property-title {
+        padding: 10px 16px;
+        display: flex;
+        align-items: center !important;
+        border-bottom: 2px solid black;
+      }
+
+      .item-empty-list {
+        min-height: 60px;
+        margin: 0px;
+      }
+
+      .card-body {
+        overflow: auto;
+        height: calc(100% - 58px);
+      }
+    }
+  }
+}
+
+.pnl-workflow-components {
+  max-width: 500px;
+  min-width: 300px;
+  margin-right: 16px;
+  margin-bottom: 0px;
+  overflow-y: auto;
+  background-color: transparent;
+}
+
+.pnl-workflow-workspace {
+  flex: 1 1;
+  margin-bottom: 0px;
+}
+
+.pnl-workflow-workspace .pnl-ctr-mdtinstance {
+  max-height: calc(100% - 620px);
+  overflow: auto;
+}
+
+.pnl-workflow-workspace .pnl-network-connect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  bottom: 0;
+}
+
+/***************************************************
+ * 
+ * Node CSS
+ * 
+ ***************************************************/
+.pnl-workflow-workspace {
+  .pnl-default-node {
+    padding: 10px;
+    min-width: 150px;
+    min-height: 35px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #1a192b;
+    background-color: #9b9b9b;
+    border-radius: 5px;
+  }
+
+  .pnl-property-node {
+    min-width: 100px;
+    min-height: 50px;
+    font-size: 12px;
+    text-align: center;
+    background-color: #3f51b5ad;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    padding: 10px;
+  }
+
+  .pnl-expand-node {
+    min-width: 150px;
+    min-height: 35px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #1a192b;
+    background-color: #9b9b9b;
+    border-radius: 5px;
+    height: 100%;
+
+    .react-flow__handle.node-handle {
+      width: 80px;
+      height: 22px;
+      border-radius: 5px;
+      background-color: #3f51b5;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0px solid;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .react-flow__handle.node-handle.out-handle {
+      background-color: #197451;
+      color: white;
+    }
+
+    .react-flow__handle-right {
+      top: auto;
+      transform: none;
+      right: -40px;
+    }
+
+    .react-flow__handle-left {
+      top: auto;
+      transform: none;
+      left: -40px;
+    }
+  }
+
+  .pnl-default-node .node-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pnl-expand-node .node-wrapper {
+    padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .node-label {
+    text-align: center;
+    background: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .task-label {
+    font-size: 10px;
+    color: black;
+  }
+
+  .react-flow__node.selected .pnl-default-node,
+  .react-flow__node.selected .pnl-expand-node {
+    border: 1px solid white;
+    background-color: #247297;
+  }
+
+  .react-flow__node.selected .pnl-default-node .node-label,
+  .react-flow__node.selected .pnl-expand-node .node-label {
+    color: white;
+  }
+
+  .react-flow__node-resizer {
+    border-radius: 0;
+    border: none;
+  }
+
+  .react-flow__resize-control.handle {
+    background-color: #ffffff;
+    border-color: #9e86ed;
+    border-radius: 0;
+    width: 5px;
+    height: 5px;
+  }
+
+  .react-flow__node .expand-node-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .expand-node-wrapper .node-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: relative;
+    width: 80px;
+    height: 100%;
+  }
+
+  .expand-node-wrapper .node-left .react-flow__handle.node-handle,
+  .expand-node-wrapper .node-right .react-flow__handle.node-handle {
+    transform: none;
+    position: relative;
+    top: 0;
+  }
+
+  .expand-node-wrapper .node-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: relative;
+    width: 80px;
+    height: 100%;
+  }
+
+  .react-flow__node {
+    .panel-status {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      display: flex;
+      align-items: center;
+
+      .panel-icon {
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        display: flex;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #ffffff;
+        color: black;
+
+        i {
+          font-size: 14px !important;
+        }
+      }
+    }
+  }
+
+  .react-flow__node .btn-node-run-icon {
+    visibility: collapse;
+  }
+}
+
+.flow-running {
+  .react-flow__node {
+    .btn-node-run-icon {
+      visibility: visible;
+      position: absolute;
+      left: -20px;
+      top: -20px;
+
+      .btn-icon {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+}
+
+.react-flow__attribution {
+  background-color: transparent;
+}
+
+.pnl-variable {
+  padding: 8px;
+  border: 1px solid #cccccc4f;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+/***************************************************
+ * 
+ * Tree CSS
+ * 
+ ***************************************************/
+.fancytree-expander:after {
+  content: "\f31c";
+}
+
+.expanded .fancytree-expander:after {
+  content: "\f31a";
+}
+
+.tree-parent {
+  margin-left: 20px;
+}
+
+.tree-child {
+  margin: 5px 0px;
+}
+
+.tree-label {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.tree-label:hover {
+  background: #2196f363;
+}
+
+table.table-input td {
+  padding: 4px;
+}
+
+td.td-label {
+  width: 200px;
+  padding-left: 16px !important;
+}
+
+.argo-workflow-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+
+  i {
+    font-size: 26px;
+  }
+}
+
+.item-name {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgba(127, 127, 127, 0.5803921569);
+  margin-top: 5px;
+  text-align: center;
+  position: absolute;
+  white-space: nowrap;
+  transform: translate(-50%, 0);
+  left: 50%;
+}

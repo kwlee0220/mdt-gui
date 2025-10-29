@@ -1,0 +1,127 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: workflow_thickness_inspection-
+spec:
+  entrypoint: dag
+  templates:
+    - name: dag
+      dag:
+        tasks:
+          - name: copy-data1
+            template: copy-data1-template
+          - name: reconfig_thickness_inspection
+            template: reconfig_thickness_inspection-template
+          - name: copy-data2
+            template: copy-data2-template
+          - name: copy-data3
+            template: copy-data3-template
+          - name: reconfig_update_defect_list
+            template: reconfig_update_defect_list-template
+          - name: copy-data4
+            template: copy-data4-template
+    - name: copy-data1-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.CopyTaskCommand
+          - >-
+            inspector/Data/DataInfo.Equipment.EquipmentParameterValues[2].ParameterValue
+          - innercase/Simulation/SimulationInfo.Inputs[0].InputValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985
+    - name: reconfig_thickness_inspection-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.HttpTaskCommand
+          - '--server'
+          - http://129.254.91.134:12987
+          - '--timeout'
+          - 5m
+          - '--logger'
+          - info
+          - '--input.DefectList'
+          - inspector/ThicknessInspection/AIInfo.Inputs[0].InputValue
+          - '--output.Result'
+          - inspector/ThicknessInspection/AIInfo.Outputs[0].OutputValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985
+    - name: copy-data2-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.CopyTaskCommand
+          - inspector/ThicknessInspection/AIInfo.Outputs[0].OutputValue
+          - inspector/AI/AIInfo.Inputs[0].InputValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985
+    - name: copy-data3-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.CopyTaskCommand
+          - >-
+            inspector/Data/DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue
+          - inspector/AI/AIInfo.Inputs[1].InputValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985
+    - name: reconfig_update_defect_list-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.HttpTaskCommand
+          - '--server'
+          - http://129.254.91.134:12987
+          - '--timeout'
+          - 5m
+          - '--logger'
+          - info
+          - '--input.Defect'
+          - inspector/UpdateDetectList/AIInfo.Inputs[0].InputValue
+          - '--input.DefectList'
+          - inspector/UpdateDetectList/AIInfo.Inputs[1].InputValue
+          - '--output.Result'
+          - inspector/UpdateDetectList/AIInfo.Outputs[0].OutputValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985
+    - name: copy-data4-template
+      container:
+        image: kwlee0220/mdt-client
+        command:
+          - java
+        args:
+          - '-cp'
+          - mdt-client-all.jar
+          - mdt.task.builtin.CopyTaskCommand
+          - inspector/UpdateDetectList/AIInfo.Outputs[0].OutputValue
+          - >-
+            inspector/Data/DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue
+        env:
+          - name: MDT_ENDPOINT
+            value: http://129.254.91.134:12985

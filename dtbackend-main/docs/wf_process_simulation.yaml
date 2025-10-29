@@ -1,0 +1,74 @@
+apiVersion: "argoproj.io/v1alpha1"
+kind: "Workflow"
+metadata:
+  generateName: "inspect-process-simulation-"
+spec:
+  entrypoint: "dag"
+  templates:
+  - name: "dag"
+    dag:
+      tasks:
+      - name: "copy-defect-list"
+        template: "copy-defect-list-template"
+      - name: "simulate-process"
+        dependencies:
+        - "copy-defect-list"
+        template: "simulate-process-template"
+      - name: "copy-avg-cycle-time"
+        dependencies:
+        - "simulate-process"
+        template: "copy-avg-cycle-time-template"
+  - name: "copy-defect-list-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+      - "inspector/ProcessSimulation/SimulationInfo.Inputs[0].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "simulate-process-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.HttpTaskCommand"
+      - "--server"
+      - "http://129.254.91.134:12987"
+      - "--id"
+      - "inspector/ProcessSimulation"
+      - "--timeout"
+      - "1m"
+      - "--logger"
+      - "info"
+      - "--submodel"
+      - "inspector/ProcessSimulation"
+      - "--in.DefectList"
+      - "inspector/ProcessSimulation/SimulationInfo.Inputs[0].InputValue"
+      - "--out.AverageCycleTime"
+      - "inspector/ProcessSimulation/SimulationInfo.Outputs[0].OutputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-avg-cycle-time-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/ProcessSimulation/SimulationInfo.Outputs[0].OutputValue"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
