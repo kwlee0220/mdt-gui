@@ -1,0 +1,18 @@
+.pnl-workflow-menu {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border: 1px solid #4d4d51;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  .divider {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 34px;
+    width: 1px;
+    background: #4d4d51;
+    margin: 0px 20px;
+  }
+}

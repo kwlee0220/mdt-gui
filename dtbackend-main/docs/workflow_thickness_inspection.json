@@ -1,0 +1,183 @@
+{
+  "id" : "workflow_thickness_inspection",
+  "name" : "두께 불량 검출 AI",
+  "description" : "두께 불량 검출 AI",
+  "tasks" : [ 
+    {
+      "id" : "copy-data1",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Data",
+          "idShortPath" : "DataInfo.Equipment.EquipmentParameterValues[2].ParameterValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "innercase",
+          "submodelIdShort" : "Simulation",
+          "idShortPath" : "SimulationInfo.Inputs[0].InputValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "reconfig_thickness_inspection",
+      "type" : "mdt.task.builtin.HttpTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "DefectList",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "ThicknessInspection",
+          "idShortPath" : "AIInfo.Inputs[0].InputValue"
+        }
+      }, {
+        "name" : "Result",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "ThicknessInspection",
+          "idShortPath" : "AIInfo.Outputs[0].OutputValue"
+        }
+      } ],
+      "options" : [ {
+        "name" : "url",
+        "optionType" : "string",
+        "value" : "http://129.254.94.36:12987/operations/reconfig_thickness_inspection"
+      }, {
+        "name" : "timeout",
+        "optionType" : "string",
+        "value" : "5m"
+      }, {
+        "name" : "logger",
+        "optionType" : "string",
+        "value" : "info"
+      } ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "copy-data2",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "ThicknessInspection",
+          "idShortPath" : "AIInfo.Outputs[0].OutputValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "AI",
+          "idShortPath" : "AIInfo.Inputs[0].InputValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "copy-data3",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Data",
+          "idShortPath" : "DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+           "twinId" : "inspector",
+          "submodelIdShort" : "AI",
+          "idShortPath" : "AIInfo.Inputs[1].InputValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "reconfig_update_defect_list",
+      "type" : "mdt.task.builtin.HttpTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "Defect",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "UpdateDetectList",
+          "idShortPath" : "AIInfo.Inputs[0].InputValue"
+        }
+      }, {
+        "name" : "DefectList",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "UpdateDetectList",
+          "idShortPath" : "AIInfo.Inputs[1].InputValue"
+        }
+      }, {
+        "name" : "Result",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "UpdateDetectList",
+          "idShortPath" : "AIInfo.Outputs[0].OutputValue"
+        }
+      } ],
+      "options" : [ {
+        "name" : "url",
+        "optionType" : "string",
+        "value" : "http://129.254.94.36:12987/operations/reconfig_thickness_inspection"
+      }, {
+        "name" : "timeout",
+        "optionType" : "string",
+        "value" : "5m"
+      }, {
+        "name" : "logger",
+        "optionType" : "string",
+        "value" : "info"
+      } ],
+      "labels" : [ ]
+    }, 
+    {
+      "id" : "copy-data4",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "UpdateDetectList",
+          "idShortPath" : "AIInfo.Outputs[0].OutputValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+           "twinId" : "inspector",
+          "submodelIdShort" : "Data",
+          "idShortPath" : "DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    } 
+  ]
+}

@@ -1,0 +1,82 @@
+
+/********************************
+*
+* FLEX 선언
+*
+**********************************/
+
+
+.flex-group{
+    display: flex;
+    align-items: center !important;
+    flex-wrap: nowrap;
+  }
+  
+  .flex-center {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center;
+    height: 100%;
+  }
+  
+  .flex-ycenter {
+    display: flex;
+    align-items: center !important;
+  }
+  
+  .flex-xcenter {
+    display: flex;
+    justify-content: center !important;
+  }
+  
+  
+  .flex-1 {
+    flex: 1;
+    overflow: hidden;
+  }
+  
+  .flex-grow {
+    flex: 1
+  }
+  
+  .d-column{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .d-row{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .flex-container {
+    overflow-y: auto;
+    flex: 1;
+    margin: 1rem !important;
+  }
+  
+  .flex-container-hidden {
+    overflow-y: hidden;
+    flex: 1;
+    margin: 1rem 0 !important;
+  }
+  
+  .flex-resource-container{
+    flex: 1;
+    margin: 4px 16px !important;
+  }
+  
+  .overflow-y{
+    overflow-y: auto !important;
+  }
+  
+  .overflow-y-hidden{
+    overflow-y: hidden !important;
+  }
+
+  .flex-grid{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    max-width: 440px;
+  }

@@ -1,0 +1,14 @@
+https://172.16.11.117:19001/api/v3.0/submodels/aHR0cHM6Ly93d3cuc2FtY2hlb24uY29tL21kdC9XZWxkZXIvc20vRGF0YQ==
+/submodel-elements/
+DataInfo.Equipment.EquipmentParameterValues[2].ParameterValue.QuantityProduced
+
+//파일 가져오는 부분
+https://172.16.11.117:19002/api/v3.0/submodels/aHR0cDovL3d3dy5sZy5jby5rci9yZWZyaWdlcmF0b3IvSW5uZXJjYXNlL1F1YWxpdHlJbnNwZWN0b3IvRGF0YQ==/submodel-elements/DataInfo.Equipment.EquipmentParameterValues[2].ParameterValue/attachment
+
+
+//값변경
+https://172.16.11.117:19002/api/v3.0/submodels/aHR0cDovL3d3dy5sZy5jby5rci9yZWZyaWdlcmF0b3IvSW5uZXJjYXNlL1F1YWxpdHlJbnNwZWN0b3IvRGF0YQ==/submodel-elements/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue/$value
+
+PATCH 
+body에 그냥 값 => xs:string이면 "abc" 형태로
+

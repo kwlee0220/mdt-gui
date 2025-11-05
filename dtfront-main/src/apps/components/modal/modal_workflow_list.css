@@ -1,0 +1,132 @@
+.modal-90w {
+  width: 90%;
+  max-width: 1200px;
+}
+
+.modal-90w .modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.modal-90w .table {
+  width: 100%;
+}
+
+.modal-90w .table th,
+.modal-90w .table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+/* 컬럼 너비 조정 */
+.modal-90w .table th:nth-child(1),
+.modal-90w .table td:nth-child(1) {
+  width: 20%;
+}
+
+.modal-90w .table th:nth-child(2),
+.modal-90w .table td:nth-child(2) {
+  width: 20%;
+}
+
+.modal-90w .table th:nth-child(3),
+.modal-90w .table td:nth-child(3) {
+  width: 12%;
+  text-align: center;
+}
+
+.modal-90w .table th:nth-child(4),
+.modal-90w .table td:nth-child(4),
+.modal-90w .table th:nth-child(5),
+.modal-90w .table td:nth-child(5) {
+  width: 19%;
+  text-align: center;
+}
+
+.modal-90w .table th:nth-child(6),
+.modal-90w .table td:nth-child(6) {
+  width: 10%;
+  text-align: center;
+}
+
+.modal-90w .btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.modal-90w .btn-xs {
+  width: 20px;
+  height: 20px;
+  font-size: 0.65rem;
+  padding: 0;
+  margin: 0 2px;
+  color: #ff0000;
+  position: relative;
+}
+
+.modal-90w .btn-group-sm {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+.modal-90w .btn-group-sm .btn {
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.modal-90w .btn-outline-warning {
+  color: #ff0000;
+  background-color: rgba(255, 193, 7, 0.3);
+  border: 1px solid white;
+}
+
+.modal-90w .btn-outline-success {
+  color: #ff0000;
+  background-color: rgba(40, 167, 69, 0.3);
+  border: 1px solid white;
+}
+
+.modal-90w .btn-outline-danger {
+  color: #ff0000;
+  background-color: rgba(220, 53, 69, 0.3);
+  border: 1px solid white;
+}
+
+.modal-90w .btn-outline-warning:hover,
+.modal-90w .btn-outline-success:hover,
+.modal-90w .btn-outline-danger:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.modal-90w .btn-outline-warning:hover {
+  background-color: rgba(255, 193, 7, 0.5);
+}
+
+.modal-90w .btn-outline-success:hover {
+  background-color: rgba(40, 167, 69, 0.5);
+}
+
+.modal-90w .btn-outline-danger:hover {
+  background-color: rgba(220, 53, 69, 0.5);
+}
+
+.modal-90w .btn-outline-warning:disabled,
+.modal-90w .btn-outline-success:disabled,
+.modal-90w .btn-outline-danger:disabled {
+  opacity: 0.4;
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* 네이티브 툴팁 스타일 개선 */
+.modal-90w [title] {
+  position: relative;
+} 

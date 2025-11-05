@@ -1,0 +1,113 @@
+apiVersion: "argoproj.io/v1alpha1"
+kind: "Workflow"
+metadata:
+  generateName: "innercase-process-optimization-"
+spec:
+  entrypoint: "dag"
+  templates:
+  - name: "dag"
+    dag:
+      tasks:
+      - name: "copy-heater-cycletime"
+        template: "copy-heater-cycletime-template"
+      - name: "copy-former-cycletime"
+        template: "copy-former-cycletime-template"
+      - name: "copy-trimmer-cycletime"
+        template: "copy-trimmer-cycletime-template"
+      - name: "copy-inspector-cycletime"
+        template: "copy-inspector-cycletime-template"
+      - name: "optimize-process"
+        dependencies:
+        - "copy-heater-cycletime"
+        - "copy-trimmer-cycletime"
+        - "copy-former-cycletime"
+        - "copy-inspector-cycletime"
+        template: "optimize-process-template"
+  - name: "copy-heater-cycletime-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "heater/Data/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[0].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-former-cycletime-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "former/Data/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[1].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-trimmer-cycletime-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "trimmer/Data/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[2].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "copy-inspector-cycletime-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.CopyTaskCommand"
+      - "inspector/Data/DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[3].InputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"
+  - name: "optimize-process-template"
+    container:
+      image: "kwlee0220/mdt-client"
+      command:
+      - "java"
+      args:
+      - "-cp"
+      - "mdt-client-all.jar"
+      - "mdt.task.builtin.HttpTaskCommand"
+      - "--server"
+      - "http://129.254.91.134:12987"
+      - "--id"
+      - "innercase/ProcessOptimization"
+      - "--timeout"
+      - "1m"
+      - "--logger"
+      - "info"
+      - "--submodel"
+      - "innercase/ProcessOptimization"
+      - "--in.HTCycleTime"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[0].InputValue"
+      - "--in.VFCycleTime"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[1].InputValue"
+      - "--in.PTCycleTime"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[2].InputValue"
+      - "--in.QICycleTime"
+      - "innercase/ProcessOptimization/SimulationInfo.Inputs[3].InputValue"
+      - "--out.TotalThroughput"
+      - "innercase/ProcessOptimization/SimulationInfo.Outputs[0].OutputValue"
+      env:
+      - name: "MDT_ENDPOINT"
+        value: "http://129.254.91.134:12985"

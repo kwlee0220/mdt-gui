@@ -1,0 +1,439 @@
+{
+  "nodes": [
+    {
+      "id": "node_1734485079321",
+      "type": "property",
+      "position": {
+        "x": -275.07836797061776,
+        "y": 600.7834780811963
+      },
+      "data": {
+        "label": "ParameterValue",
+        "item": {
+          "modelType": "Property",
+          "value": "0,0,0,0,0,0,1,1,0,0,0",
+          "valueType": "xs:string",
+          "category": "",
+          "description": [
+            {
+              "language": "Korean",
+              "text": "파라미터값"
+            }
+          ],
+          "idShort": "ParameterValue",
+          "meta": {
+            "twinId": "inspector",
+            "aasTwinId": "http://www.lg.co.kr/refrigerator/innercase/QualityInspectionor",
+            "aasTwinIdShort": "QualityInspector",
+            "submodelId": "http://www.lg.co.kr/refrigerator/Innercase/QualityInspector/Data",
+            "submodelIdShort": "Data",
+            "idShortPath": "Data.DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+          }
+        }
+      },
+      "measured": {
+        "width": 110,
+        "height": 50
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485083881",
+      "type": "copy",
+      "position": {
+        "x": -119.1595636901692,
+        "y": 482.95940214022426
+      },
+      "data": {
+        "label": "COPY",
+        "item": {
+          "id": "CopyDetectList",
+          "type": "mdt.task.builtin.CopyTask",
+          "dependencies": [],
+          "variables": [
+            {
+              "name": "from",
+              "kind": "INPUT",
+              "valueReference": {
+                "idShortPath": "ParameterValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            },
+            {
+              "name": "to",
+              "kind": "OUTPUT",
+              "valueReference": {
+                "idShortPath": "InputValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            }
+          ],
+          "options": [],
+          "labels": [],
+          "name": "CopyDetectList"
+        }
+      },
+      "measured": {
+        "width": 210,
+        "height": 60
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485115651",
+      "type": "property",
+      "position": {
+        "x": 155.36679461244785,
+        "y": 596.4601090774578
+      },
+      "data": {
+        "label": "InputValue",
+        "item": {
+          "modelType": "Property",
+          "value": "",
+          "valueType": "xs:string",
+          "category": "",
+          "description": [
+            {
+              "language": "Korean",
+              "text": "입력값"
+            }
+          ],
+          "idShort": "InputValue",
+          "meta": {
+            "twinId": "inspector",
+            "aasTwinId": "http://www.lg.co.kr/refrigerator/innercase/QualityInspectionor",
+            "aasTwinIdShort": "QualityInspector",
+            "submodelId": "http://www.lg.co.kr/refrigerator/Innercase/QualityInspector/Simulation/ProcessSimulation",
+            "submodelIdShort": "Simulation",
+            "idShortPath": "Simulation.SimulationInfo.Inputs[0].InputValue"
+          }
+        }
+      },
+      "measured": {
+        "width": 100,
+        "height": 50
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485137065",
+      "type": "http",
+      "position": {
+        "x": 331.44940420646606,
+        "y": 476.4601090774577
+      },
+      "data": {
+        "label": "HTTP",
+        "item": {
+          "id": "ProcessSimulation",
+          "type": "mdt.task.builtin.HttpTask",
+          "dependencies": [],
+          "variables": [
+            {
+              "name": "DefectList",
+              "kind": "INPUT",
+              "valueReference": {
+                "idShortPath": "InputValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            },
+            {
+              "name": "AverageCycleTime",
+              "kind": "OUTPUT",
+              "valueReference": {
+                "idShortPath": "OutputValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            }
+          ],
+          "options": [
+            {
+              "name": "url",
+              "optionType": "string",
+              "value": ""
+            },
+            {
+              "name": "timeout",
+              "optionType": "string",
+              "value": ""
+            },
+            {
+              "name": "logger",
+              "optionType": "string",
+              "value": ""
+            }
+          ],
+          "labels": []
+        }
+      },
+      "measured": {
+        "width": 229,
+        "height": 60
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485194988",
+      "type": "property",
+      "position": {
+        "x": 629.2165219188037,
+        "y": 597.2435871586541
+      },
+      "data": {
+        "label": "OutputValue",
+        "item": {
+          "modelType": "Property",
+          "value": "",
+          "valueType": "xs:string",
+          "category": "",
+          "description": [
+            {
+              "language": "Korean",
+              "text": "출력값"
+            }
+          ],
+          "idShort": "OutputValue",
+          "meta": {
+            "twinId": "inspector",
+            "aasTwinId": "http://www.lg.co.kr/refrigerator/innercase/QualityInspectionor",
+            "aasTwinIdShort": "QualityInspector",
+            "submodelId": "http://www.lg.co.kr/refrigerator/Innercase/QualityInspector/Simulation/ProcessSimulation",
+            "submodelIdShort": "Simulation",
+            "idShortPath": "Simulation.SimulationInfo.Outputs[0].OutputValue"
+          }
+        }
+      },
+      "measured": {
+        "width": 100,
+        "height": 50
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485206291",
+      "type": "copy",
+      "position": {
+        "x": 792.5035346861669,
+        "y": 464.8254898154389
+      },
+      "data": {
+        "label": "COPY",
+        "item": {
+          "id": "CopyCycleTime",
+          "type": "mdt.task.builtin.CopyTask",
+          "dependencies": [],
+          "variables": [
+            {
+              "name": "from",
+              "kind": "INPUT",
+              "valueReference": {
+                "idShortPath": "OutputValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            },
+            {
+              "name": "to",
+              "kind": "OUTPUT",
+              "valueReference": {
+                "idShortPath": "ParameterValue",
+                "submodelIdShort": "",
+                "twinId": ""
+              }
+            }
+          ],
+          "options": [],
+          "labels": [],
+          "name": "CopyCycleTime"
+        }
+      },
+      "measured": {
+        "width": 208,
+        "height": 60
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "node_1734485233261",
+      "type": "property",
+      "position": {
+        "x": 1100.5299131512822,
+        "y": 584.2222177416671
+      },
+      "data": {
+        "label": "ParameterValue",
+        "item": {
+          "modelType": "Property",
+          "value": "12",
+          "valueType": "xs:string",
+          "category": "",
+          "description": [
+            {
+              "language": "Korean",
+              "text": "파라미터값"
+            }
+          ],
+          "idShort": "ParameterValue",
+          "meta": {
+            "twinId": "inspector",
+            "aasTwinId": "http://www.lg.co.kr/refrigerator/innercase/QualityInspectionor",
+            "aasTwinIdShort": "QualityInspector",
+            "submodelId": "http://www.lg.co.kr/refrigerator/Innercase/QualityInspector/Data",
+            "submodelIdShort": "Data",
+            "idShortPath": "Data.DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+          }
+        }
+      },
+      "measured": {
+        "width": 110,
+        "height": 50
+      },
+      "selected": true,
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_1734485079321",
+      "sourceHandle": null,
+      "target": "node_1734485083881",
+      "targetHandle": "handle_input_node_1734485083881_from",
+      "id": "line_1734485099062",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    },
+    {
+      "source": "node_1734485083881",
+      "sourceHandle": "handle_output_node_1734485083881_to",
+      "target": "node_1734485115651",
+      "targetHandle": null,
+      "id": "line_1734485117767",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    },
+    {
+      "source": "node_1734485115651",
+      "sourceHandle": null,
+      "target": "node_1734485137065",
+      "targetHandle": "handle_input_node_1734485137065_DefectList",
+      "id": "line_1734485177041",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    },
+    {
+      "source": "node_1734485137065",
+      "sourceHandle": "handle_output_node_1734485137065_AverageCycleTime",
+      "target": "node_1734485194988",
+      "targetHandle": null,
+      "id": "line_1734485197111",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    },
+    {
+      "source": "node_1734485194988",
+      "sourceHandle": null,
+      "target": "node_1734485206291",
+      "targetHandle": "handle_input_node_1734485206291_from",
+      "id": "line_1734485211361",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    },
+    {
+      "source": "node_1734485206291",
+      "sourceHandle": "handle_output_node_1734485206291_to",
+      "target": "node_1734485233261",
+      "targetHandle": null,
+      "id": "line_1734485234994",
+      "type": "smoothstep",
+      "markerEnd": {
+        "type": "arrowclosed",
+        "width": 10,
+        "height": 10,
+        "color": "#FF0072"
+      },
+      "data": {
+        "label": ""
+      },
+      "style": {
+        "strokeWidth": 1,
+        "stroke": "#FF0072"
+      }
+    }
+  ],
+  "viewport": {
+    "x": 308.9867786329214,
+    "y": -5.28964370914872,
+    "zoom": 0.844765219981392
+  }
+}

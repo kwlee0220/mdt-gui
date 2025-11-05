@@ -1,0 +1,91 @@
+{
+  "id" : "workflow_process_simulation",
+  "name" : "설비 시뮬레이션",
+  "description" : "설비 시뮬레이션",
+  "tasks" : [ 
+    {
+      "id" : "copy-data1",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Data",
+          "idShortPath" : "DataInfo.Equipment.EquipmentParameterValues[1].ParameterValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Simulation",
+          "idShortPath" : "SimulationInfo.Inputs[0].InputValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "copy-data2",
+      "type" : "mdt.task.builtin.CopyTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "from",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Data",
+          "idShortPath" : "SimulationInfo.Outputs[0].InputValue"
+        }
+      }, {
+        "name" : "to",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Simulation",
+          "idShortPath" : "DataInfo.Equipment.EquipmentParameterValues[0].ParameterValue"
+        }
+      } ],
+      "options" : [ ],
+      "labels" : [ ]
+    },
+    {
+      "id" : "reconfig_process_simulation",
+      "type" : "mdt.task.builtin.HttpTask",
+      "dependencies" : [ ],
+      "variables" : [ {
+        "name" : "DefectList",
+        "kind" : "INPUT",
+        "valueReference" : {
+          "twinId" : "inspector",
+          "submodelIdShort" : "Simulation",
+          "idShortPath" : "SimulationInfo.Inputs[0].InputValue"
+        }
+      }, {
+        "name" : "Result",
+        "kind" : "OUTPUT",
+        "valueReference" : {
+          "twinId" : "innercase",
+          "submodelIdShort" : "Simulation",
+          "idShortPath" : "SimulationInfo.Outputs[0].OutputValue"
+        }
+      } ],
+      "options" : [ {
+        "name" : "url",
+        "optionType" : "string",
+        "value" : "http://129.254.94.36:12987/operations/reconfig_process_simulation"
+      }, {
+        "name" : "timeout",
+        "optionType" : "string",
+        "value" : "5m"
+      }, {
+        "name" : "logger",
+        "optionType" : "string",
+        "value" : "info"
+      } ],
+      "labels" : [ ]
+    }    
+  ]
+}

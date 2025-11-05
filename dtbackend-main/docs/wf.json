@@ -1,0 +1,58 @@
+{
+    "id":"test",
+    "name":"test",
+    "description":"",
+    "tasks":[
+       {
+          "id":"CopyDetectList",
+          "type":"mdt.task.builtin.CopyTask",
+          "dependencies":[
+             
+          ],
+          "variables":[
+             "Array"
+          ],
+          "options":[
+             
+          ],
+          "labels":[
+             
+          ],
+          "name":"CopyDetectList"
+       },
+       {
+          "id":"ProcessSimulation",
+          "type":"mdt.task.builtin.HttpTask",
+          "dependencies":[
+             "Array"
+          ],
+          "variables":[
+             "Array"
+          ],
+          "options":[
+             "Array"
+          ],
+          "labels":[
+             
+          ]
+       },
+       {
+          "id":"CopyCycleTime",
+          "type":"mdt.task.builtin.CopyTask",
+          "dependencies":[
+             "Array"
+          ],
+          "variables":[
+             "Array"
+          ],
+          "options":[
+             
+          ],
+          "labels":[
+             
+          ],
+          "name":"CopyCycleTime"
+       }
+    ]
+ }
+ 
