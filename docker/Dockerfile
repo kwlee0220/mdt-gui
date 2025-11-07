@@ -12,16 +12,18 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 작업 디렉토리 설정
-WORKDIR /mdt/mdt-gui-backend
+WORKDIR /mdt/mdt-gui
 
-RUN mkdir -p /mdt/mdt-gui-backend
-COPY ./mdt-gui-backend /mdt/mdt-gui-backend
+COPY ./mdt-gui /mdt/mdt-gui
+COPY ./start-services.sh /usr/local/bin/start-services.sh
+RUN chmod +x /usr/local/bin/start-services.sh
 
 # 의존성 설치
-RUN yarn install
+RUN (cd /mdt/mdt-gui/dtbackend-main && yarn install) \
+    && (cd /mdt/mdt-gui/dtfront-main && yarn install)
 
 # 기본 환경 변수 설정
 ENV NODE_ENV=production
 
 # 컨테이너 시작 시 실행할 명령어
-CMD ["yarn", "start"]
+CMD ["/usr/local/bin/start-services.sh"]
