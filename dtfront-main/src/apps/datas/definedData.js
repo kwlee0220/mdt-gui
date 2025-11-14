@@ -272,7 +272,7 @@ export const useGenesisDataManager = () => {
         label = "jslt";
         break;
       case TaskType.AAS:
-        label = "mdt";
+        label = "aas";
         break;
       case TaskType.Property:
         label = "Property";
