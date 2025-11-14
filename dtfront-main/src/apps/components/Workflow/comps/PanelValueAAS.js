@@ -292,7 +292,7 @@ const PanelValueAAS = forwardRef(({ task }, ref) => {
       {error && <div className="alert alert-danger">{error}</div>}
       <div className="row mb-2">
         <label className="col-form-label col-3">타입</label>
-        <label className="col-form-label col-9">AAS</label>
+        <label className="col-form-label col-9">MDT</label>
       </div>
       <div className="row mb-2">
         <label className="col-form-label col-3">
