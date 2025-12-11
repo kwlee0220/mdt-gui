@@ -15,15 +15,12 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /mdt/mdt-gui
 
 COPY ./mdt-gui /mdt/mdt-gui
-COPY ./start-services.sh /usr/local/bin/start-services.sh
-RUN chmod +x /usr/local/bin/start-services.sh
+COPY ./start-services.sh /mdt/mdt-gui/start-services.sh
+RUN chmod +x /mdt/mdt-gui/start-services.sh
 
 # 의존성 설치
 RUN (cd /mdt/mdt-gui/dtbackend-main && yarn install) \
     && (cd /mdt/mdt-gui/dtfront-main && yarn install)
 
-# 기본 환경 변수 설정
-ENV NODE_ENV=production
-
 # 컨테이너 시작 시 실행할 명령어
-CMD ["/usr/local/bin/start-services.sh"]
+CMD ["/mdt/mdt-gui/start-services.sh"]

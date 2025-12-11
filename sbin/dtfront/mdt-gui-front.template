@@ -1,0 +1,18 @@
+[Unit]
+Description=MDT GUI
+After=network.target
+
+[Service]
+Type=simple
+User=${USER}
+Group=${USER}
+WorkingDirectory=${MDT_HOME}/mdt-gui/dtfront-main
+ExecStartPre=/bin/sleep 10
+ExecStart=yarn start
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

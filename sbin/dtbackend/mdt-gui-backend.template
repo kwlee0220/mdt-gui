@@ -1,0 +1,17 @@
+[Unit]
+Description=MDT GUI
+After=network.target
+
+[Service]
+Type=simple
+User=${USER}
+Group=${USER}
+WorkingDirectory=${MDT_HOME}/mdt-gui/dtbackend-main
+ExecStart=yarn start
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

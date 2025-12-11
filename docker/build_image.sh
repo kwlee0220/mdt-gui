@@ -55,7 +55,5 @@ else
     exit 1
 fi
 
-# docker push kwlee0220/mdt-gui-backend:$MDT_VERSION
-
 # 클론한 디렉토리 정리
 rm -rf mdt-gui
