@@ -29,8 +29,17 @@ const WidgetImage = ({ item }) => {
 
   const fetchGetValue = async () => {
     const cacheBuster = `?t=${Date.now()}`;
+
+    let path = "";
+
+    if (link.endsWith("/attachment")) {
+      path = `${link}${cacheBuster}`;
+    } else {
+      path = `${link}/attachment${cacheBuster}`;
+    }
+
     let result = await REQ_RELATION_CALL_IMAGE({
-      url: `${link}/attachment${cacheBuster}`,
+      url: path,
     });
 
     if (result) {

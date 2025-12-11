@@ -83,7 +83,16 @@ const WidgetChart = ({ item }) => {
       let value = result.value;
 
       if (type === TaskType.Property && !IS_OBJECT(value)) {
-        if (!IS_NUMBER(value)) {
+        if (typeof value === "string") {
+          value = value.trim();
+        }
+        const num = typeof value === "number" ? value : Number(value);
+        const isNumeric = Number.isFinite(num);
+        const isFloat = isNumeric && !Number.isInteger(num);
+
+        if (isNumeric || isFloat) {
+          value = num;
+        } else {
           value = GET_Duration_To_Second(value);
         }
 
@@ -139,7 +148,16 @@ const WidgetChart = ({ item }) => {
 
   const getOption = () => {
     let option = {
-      color: ["#2196f3", "#2b9919", "#576eed", "#f59e0b"],
+      color: [
+        "#2196f3",
+        "#fac858",
+        "#f32626",
+        "#2b9919",
+        "#e4e4e4",
+        "#fc9f00",
+        "#e749ec",
+        "#229e9a",
+      ],
       tooltip: {
         trigger: "axis",
         axisPointer: {
