@@ -11,10 +11,6 @@ const ModalMDTInstance = ({ open, closeModal, handleAddInstance }) => {
         setError("ID를 입력해주세요.");
         return;
       }
-      if (!inputData.port) {
-        setError("Port를 입력해주세요.");
-        return;
-      }
       if (!inputData.bundle) {
         setError("번들파일을 선택해주세요.");
         return;
@@ -22,7 +18,7 @@ const ModalMDTInstance = ({ open, closeModal, handleAddInstance }) => {
       
       const formData = new FormData();
       formData.append("id", inputData.id);
-      formData.append("port", inputData.port);
+      formData.append("port", inputData.port || -1);
       formData.append("bundle", inputData.bundle);
       
       // 오류 처리는 MDITable.js의 fetchAdd 함수에서 처리
